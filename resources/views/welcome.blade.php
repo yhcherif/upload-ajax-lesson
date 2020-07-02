@@ -109,26 +109,23 @@
             form.addEventListener("submit", (event) => {
                 event.preventDefault();
                 let formData = new FormData();
+
                 data.title = document.querySelector("input[name=title]").value;
                 data.body = document.querySelector("textarea[name=body]").value;
-                // let file = document.querySelector("input[name=cover]");
-                // console.log(file);
-                // return;
+
                 formData.append("title", data.title);
                 formData.append("body", data.body);
                 formData.append("cover", data.cover);
+
                 showProgress(true);
+
                 axios.post("/posts", formData).then(({data}) => {
-                    console.log("Done.");
                     showProgress(false);
                     fetchRecentPosts();
                 }).catch(error => {
                     console.error("Unable to store your story");
                     showProgress(false);
                 })
-                fetchRecentPosts(() => {
-                    console.error("Fetching.....")
-                });
             });
         </script>
     </body>
